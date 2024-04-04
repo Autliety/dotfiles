@@ -1,0 +1,265 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Maintainer: 
+"    Auly (whitefryfish@gmail.com)
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => General
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" No compatible to vi. To enable improvement functions
+set nocompatible
+
+" Sets how many lines of history VIM has to remember
+set history=512
+
+" Enable filetype plugins
+filetype plugin indent on
+
+" Set to auto read when a file is changed from the outside
+set autoread
+autocmd FocusGained,BufEnter * checktime
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => VIM user interface
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Set 7 lines to the cursor - when moving vertically using j/k
+set scrolloff=7
+
+" Avoid garbled characters in Chinese language windows OS
+let $LANG='en' 
+set langmenu=en
+set helplang=cn
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
+
+" Config the command Wild menu
+set wildmenu
+set wildignore=*.o,*~,*.pyc
+if has("win16") || has("win32")
+    set wildignore+=.git\*,.hg\*,.svn\*
+else
+    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
+endif
+
+" Status line and command line
+set laststatus=2
+set statusline=\ %F%m%r%h\ %w\ @%r%{getcwd()}%h\ %=\ %n[%l:%c]
+set cmdheight=1
+
+" Hid the buffer when abandoned
+set hidden
+
+" Searching configuration
+set nowrapscan
+set ignorecase
+set smartcase
+set hlsearch
+set incsearch 
+
+" Lazy redraw for macros, performance improvement
+set lazyredraw 
+
+" No annoying sound on errors
+set noerrorbells
+set novisualbell
+
+set t_vb=
+set tm=500
+
+" Add a bit extra margin to the left
+set foldcolumn=1
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => UI preference
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Set utf8 as standard encoding and en_US as the standard language
+set encoding=utf8
+
+" Use Unix as the standard file type
+set fileformats=unix,dos,mac
+
+" Enable syntax highlighting
+syntax enable 
+
+" Enable 256 colors palette in Gnome Terminal
+if $COLORTERM == 'gnome-terminal'
+    set t_Co=256
+endif
+
+" Try to enable colorscheme
+try
+    colorscheme molokai
+catch
+endtry
+
+set background=dark
+
+" Set extra options when running in GUI mode
+set guioptions=a
+if has("gui_running")
+    set guioptions-=emT
+    set t_Co=256
+endif
+
+" Turn backup off, change viminfo location
+set nobackup
+set writebackup
+set noswapfile
+set viminfo='1000,f1,<500,n~/.vim/viminfo
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Text editor
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Use system clipboard
+set clipboard+=unnamed
+
+" Configure backspace so it acts as it should act
+set backspace=eol,start,indent
+set whichwrap+=<,>
+
+" 2 space as tab
+set expandtab
+set smarttab
+set shiftwidth=2
+set tabstop=2
+set softtabstop=2
+
+" Linebreak
+set linebreak
+
+" Indent
+set autoindent
+set smartindent
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Keymaps
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Save and reload vimrc
+command Source execute "source ~/.vim/vimrc"
+
+" Quick command mode
+nnoremap ; :
+
+" Custom cursor move
+noremap = +
+noremap + =
+noremap J 10j
+noremap K 10k
+inoremap <C-h> <left>
+inoremap <C-j> <down>
+inoremap <C-k> <up>
+inoremap <C-l> <right>
+inoremap <C-a> <C-o>A
+
+" Use space as leader key
+noremap <space> <Nop>
+let mapleader=" "
+
+" Disable serching highlight
+noremap <silent> gh :nohlsearch<cr>
+
+" Use "z clipboard to avoid override by system
+noremap <silent> <leader>y "zy
+noremap <silent> <leader>p "Zp
+
+" Move between windows
+noremap <C-j> <C-W>j
+noremap <C-k> <C-W>k
+noremap <C-h> <C-W>h
+noremap <C-l> <C-W>l
+
+" save and/or quit
+noremap <leader>ww :w<cr>
+noremap <leader>wq :wq<cr>
+noremap <leader>qq :b #<cr>:bd #<cr>
+noremap <leader>qa :bufdo bd<cr>:q<cr>
+
+" buffer change
+noremap <leader>bh :bnext<cr>
+noremap <leader>bl :bprevious<cr>
+
+" Tab management
+nnoremap <silent> <leader>tn :$tabnew<cr>
+nnoremap <silent> <leader>nn :tabnew<cr>
+nnoremap <silent> <leader>tc :tabclose<cr>
+nnoremap <silent> <leader>cc :tabclose<cr>
+nnoremap <silent> <leader>to :tabonly<cr>
+
+nnoremap <leader>tm :tabmove 
+nnoremap <silent> <leader>h :tabprevious<cr>
+nnoremap <silent> <leader>l :tabnext<cr> 
+
+nnoremap <silent> <leader>1 1gt
+nnoremap <silent> <leader>2 2gt
+nnoremap <silent> <leader>3 3gt
+nnoremap <silent> <leader>4 4gt
+nnoremap <silent> <leader>5 5gt
+nnoremap <silent> <leader>6 6gt
+nnoremap <silent> <leader>7 7gt
+nnoremap <silent> <leader>8 8gt
+nnoremap <silent> <leader>9 9gt
+nnoremap <silent> <leader>0 10gt
+
+" Use 'tt' to switch between last accessed tabs
+let g:lasttab = 1
+nnoremap <silent> <Leader>tt :exe "tabn ".g:lasttab<CR>
+autocmd TabLeave * let g:lasttab = tabpagenr()
+
+" Use 'te' to prepare to open a new file from pwd
+noremap <leader>te :tabedit <C-r>=expand("%:p:h")<cr>/
+
+" Specify the behavior when switching between buffers 
+try
+  set switchbuf=useopen,usetab,newtab
+  set stal=2
+catch
+endtry
+
+" Return to last edit position when opening files
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+" Remap 0 to first non-blank character
+map 0 ^
+
+" Delete trailing white space on save for some filetypes
+fun! CleanTrailing()
+    let save_cursor = getpos(".")
+    let old_query = getreg('/')
+    silent! %s/\s\+$//e
+    call setpos('.', save_cursor)
+    call setreg('/', old_query)
+endfun
+autocmd BufWritePre *.txt,*.py,*.wiki,*.sh :call CleanTrailing()
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Custom
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" disable startup message
+set shortmess=alI
+" line number
+set number
+set relativenumber
+" cursor
+set cursorline
+set ruler
+" visibility
+set showmode
+set showcmd
+set showmatch
+set matchtime=2
+" split new tab below & right
+set splitbelow
+set splitright
+" enable mouse
+set mouse=a
+" pair braces
+inoremap ( ()<left>
+inoremap { {}<left>
+inoremap [ []<left>
+

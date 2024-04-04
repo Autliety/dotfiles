@@ -1,0 +1,11 @@
+# set zsh dotfiles location
+export ZDOTDIR=$HOME/.config/zsh
+
+# set default editor
+export EDITOR=vim
+
+# add homebrew binaries to $PATH
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# include ~/.zshenv.local if exists
+[[ -r $HOME/.zshenv.local ]] && source $HOME/.zshenv.local
