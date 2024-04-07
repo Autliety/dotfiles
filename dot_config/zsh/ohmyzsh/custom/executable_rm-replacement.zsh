@@ -29,8 +29,10 @@ function dd() {
     echo "$trash"
     ls -a "$trash"
     if [[ "$1" == "-c" ]] || [[ "$1" == "--clean" ]]; then
-        echo "WARNING: data lost risk!!!"
-        echo "All files and folders is going to be DELETED now!!!"
+        echo "-----------------------------------------------------"
+        echo "| WARNING: data lost risk!!!                        |"
+        echo "| All files and folders is going to be DELETED now! |"
+        echo "-----------------------------------------------------"
         command rm -rIv $trash/*
         command rm -rIv $trash/.*
     fi
