@@ -145,6 +145,8 @@ command Source execute "source ~/.vim/vimrc"
 " Quick command mode
 nnoremap ; :
 
+" Quick exit input mode
+inoremap jk <Esc>
 " Custom cursor move
 noremap = +
 noremap + =
@@ -224,7 +226,7 @@ endtry
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 " Remap 0 to first non-blank character
-map 0 ^
+noremap 0 ^
 
 " Delete trailing white space on save for some filetypes
 fun! CleanTrailing()

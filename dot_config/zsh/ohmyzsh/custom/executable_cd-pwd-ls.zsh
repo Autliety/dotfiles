@@ -2,5 +2,5 @@
 function cd() {
     builtin cd "$@"
     pwd
-    ls
+    command ls -GF
 }
