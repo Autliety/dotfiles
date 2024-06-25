@@ -3,3 +3,4 @@
 	name = Auley
 [core]
 	pager = less -FRX
+	autocrlf = input

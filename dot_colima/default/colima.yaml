@@ -180,4 +180,6 @@ mounts: []
 #   ANOTHER_KEY: another value
 #
 # Default: {}
-env: {}
+env:
+  HTTP_PROXY: http://host.docker.internal:10809
+  HTTPS_PROXY: http://host.docker.internal:10809
