@@ -33,38 +33,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "q",
-                                        "modifiers": [
-                                            "left_control",
-                                            "left_command"
-                                        ]
-                                    },
-                                    {
-                                        "shell_command": "sleep 0.1 && sudo pmset displaysleepnow"
-                                    }
-                                ]
-                            },
-                            {
-                                "type": "basic",
-                                "from": {
-                                    "key_code": "page_down",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift",
-                                            "left_command"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "q",
-                                        "modifiers": [
-                                            "left_control",
-                                            "left_command"
-                                        ]
-                                    },
-                                    {
-                                        "shell_command": "sleep 0.1 && sudo pmset displaysleepnow"
+                                        "shell_command": "sleep 0.1 && pmset displaysleepnow"
                                     }
                                 ]
                             }
@@ -260,44 +229,6 @@
                                 "to_if_held_down": [
                                     {
                                         "key_code": "left_option"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com\\.moonlight-stream\\.Moonlight",
-                                            "^com\\.microsoft\\.rdc",
-                                            "^com\\.teamviewer\\.TeamViewer",
-                                            "^com\\.vmware\\.horizon",
-                                            "^com\\.vmware\\.fusion",
-                                            "^com\\.vmware\\.view",
-                                            "^com\\.vmware\\.proxyApp",
-                                            "^com\\.parallels\\.desktop",
-                                            "^com\\.parallels\\.vm",
-                                            "^com\\.parallels\\.winapp",
-                                            "^org\\.virtualbox\\.app\\.VirtualBoxVM"
-                                        ],
-                                        "type": "frontmost_application_unless"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "right_option"
-                                },
-                                "parameters": {
-                                    "basic.to_if_alone_timeout_milliseconds": 500,
-                                    "basic.to_if_held_down_threshold_milliseconds": 0
-                                },
-                                "to_if_alone": [
-                                    {
-                                        "shell_command": "open -a 'Launchpad'"
-                                    }
-                                ],
-                                "to_if_held_down": [
-                                    {
-                                        "key_code": "right_option"
                                     }
                                 ],
                                 "type": "basic"
